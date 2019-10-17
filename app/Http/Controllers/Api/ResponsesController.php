@@ -55,7 +55,7 @@ class ResponsesController extends Controller
      * @param  \App\Response  $response
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Response $response)
+    public function update(StoreRequest $request, Response $response)
     {
         return response()->json($response->update($request->only([
             'score',

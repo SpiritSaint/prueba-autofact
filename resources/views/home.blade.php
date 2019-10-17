@@ -12,72 +12,77 @@
                             </div>
                         @endif
 
-                        @if (auth()->user()->is_admin)
+                        <div class="tab-content" id="myTabContent">
+                            @if (auth()->user()->is_admin)
 
-                            <h1>Administrador</h1>
-                            <div>
-                                <chart :responses="{{\App\Response::all()}}"></chart>
-                            </div>
-                        @endif
+                                <div class="tab-pane fade show active" id="graph" role="tabpanel" aria-labelledby="graph-tab">
+                                    <h1>Gráfico</h1>
+                                    <chart :responses="{{\App\Response::all()}}"></chart>
+                                </div>
+                            @endif
+
+                            <div class="tab-pane fade show active" id="last" role="tabpanel" aria-labelledby="last-tab">
 
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul class="mb-0">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 
-                        @if (\App\Repositories\MonthlyFormRepository::can())
-                        <h1>Formulario</h1>
+                                @if (\App\Repositories\MonthlyFormRepository::can())
+                                    <h1>Formulario</h1>
 
-                        <form method="POST" action="{{ route('responses.store') }}">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="suggestions">¿Qué te gustaría que agregáramos al informe?</label>
-                                <textarea name="suggestions" id="suggestions" type="password" class="form-control" rows="3"></textarea>
+                                    <form method="POST" action="{{ route('responses.store') }}">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <label for="suggestions">¿Qué te gustaría que agregáramos al informe?</label>
+                                            <textarea name="suggestions" id="suggestions" type="password" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="is_correct">¿La información es correcta?</label>
+                                            <select name="is_correct" id="is_correct" class="custom-select">
+                                                <option selected>Seleccione una opción</option>
+                                                <option value="1">SI</option>
+                                                <option value="2">NO</option>
+                                                <option value="3">Más o menos</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="is_correct">¿Del 1 al 5, es rápido el sitio?</label>
+                                            <br>
+                                            <div class="form-check form-check-inline">
+                                                <input name="score" class="form-check-input" type="radio" id="inlineCheckbox1" value="1">
+                                                <label class="form-check-label" for="inlineCheckbox1">1</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="score" class="form-check-input" type="radio" id="inlineCheckbox2" value="2">
+                                                <label class="form-check-label" for="inlineCheckbox2">2</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="score" class="form-check-input" type="radio" id="inlineCheckbox3" value="3">
+                                                <label class="form-check-label" for="inlineCheckbox3">3</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="score" class="form-check-input" type="radio" id="inlineCheckbox4" value="4">
+                                                <label class="form-check-label" for="inlineCheckbox4">4</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input name="score" class="form-check-input" type="radio" id="inlineCheckbox5" value="5">
+                                                <label class="form-check-label" for="inlineCheckbox5">5</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </form>
+                                @else
+                                    @include('partials.last-submit', ['last' => \App\Repositories\MonthlyFormRepository::last()])
+                                @endif
                             </div>
-                            <div class="form-group">
-                                <label for="is_correct">¿La información es correcta?</label>
-                                <select name="is_correct" id="is_correct" class="custom-select">
-                                    <option selected>Seleccione una opción</option>
-                                    <option value="1">SI</option>
-                                    <option value="2">NO</option>
-                                    <option value="3">Más o menos</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="is_correct">¿Del 1 al 5, es rápido el sitio?</label>
-                                <br>
-                                <div class="form-check form-check-inline">
-                                    <input name="score" class="form-check-input" type="radio" id="inlineCheckbox1" value="1">
-                                    <label class="form-check-label" for="inlineCheckbox1">1</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="score" class="form-check-input" type="radio" id="inlineCheckbox2" value="2">
-                                    <label class="form-check-label" for="inlineCheckbox2">2</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="score" class="form-check-input" type="radio" id="inlineCheckbox3" value="3">
-                                    <label class="form-check-label" for="inlineCheckbox3">3</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="score" class="form-check-input" type="radio" id="inlineCheckbox4" value="4">
-                                    <label class="form-check-label" for="inlineCheckbox4">4</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input name="score" class="form-check-input" type="radio" id="inlineCheckbox5" value="5">
-                                    <label class="form-check-label" for="inlineCheckbox5">5</label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </form>
-                        @else
-                            @include('partials.last-submit', ['last' => \App\Repositories\MonthlyFormRepository::last()])
-                        @endif
+                        </div>
                     </div>
                 </div>
             </div>

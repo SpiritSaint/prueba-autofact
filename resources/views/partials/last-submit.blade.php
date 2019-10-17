@@ -1,4 +1,4 @@
-<h1>Última respuesta</h1>
+<h1 class="mt-4">Última respuesta</h1>
 <table class="table">
     <thead>
     <tr>
