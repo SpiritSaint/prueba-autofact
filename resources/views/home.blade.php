@@ -12,14 +12,36 @@
                             </div>
                         @endif
 
-                        <form>
+                        @if (auth()->user()->is_admin)
+
+                            <h1>Administrador</h1>
+                            <div>
+                                <div class="ct-chart ct-perfect-fourth"></div>
+                            </div>
+                        @endif
+
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <h1>Formulario</h1>
+
+                        <form method="POST" action="{{ route('responses.store') }}">
+                            {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="suggestions">¿Qué te gustaría que agregáramos al informe?</label>
-                                <textarea id="suggestions" type="password" class="form-control" rows="3"></textarea>
+                                <textarea name="suggestions" id="suggestions" type="password" class="form-control" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="is_correct">¿La información es correcta?</label>
-                                <select id="is_correct" class="custom-select">
+                                <select name="is_correct" id="is_correct" class="custom-select">
                                     <option selected>Seleccione una opción</option>
                                     <option value="1">SI</option>
                                     <option value="2">NO</option>
@@ -57,6 +79,51 @@
             </div>
         </div>
     </div>
-    </div>
+@endsection
+
+@section('chart')
+    <style>
+        .ct-label {
+            color: #FFF !important;
+            fill: #FFF !important;
+            text-shadow: 0px 1px 0px rgba(0,0,0,1);
+        }
+    </style>
+
+    <script  type="text/javascript">
+        var objects = {!! \App\Response::all()->toJson() !!};
+        var values = [1,2,3,4,5].map(function(score) {
+            return (objects.filter((object) => object.score === score).length / objects.length) * 100;
+        })
+            console.log(values);
+        (function() {
+            var data = {
+                labels: ['1', '2', '3', '4', '5'],
+                series: values
+            };
+            var options = {
+                labelInterpolationFnc: function(value) {
+                    return value
+                }
+            };
+            var responsiveOptions = [
+                ['screen and (min-width: 640px)', {
+                    chartPadding: 30,
+                    labelOffset: 100,
+                    labelDirection: 'explode',
+                    labelInterpolationFnc: function(value) {
+                        return value;
+                    }
+                }],
+                ['screen and (min-width: 1024px)', {
+                    labelOffset: 80,
+                    chartPadding: 20
+                }]
+            ];
+            setTimeout(function () {
+                new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
+            }, 1000)
+        })();
+    </script>
 @endsection
 

@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="/chart/chartist.min.css">
+    <script src="/chart/chartist.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -76,5 +79,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('chart')
 </body>
 </html>

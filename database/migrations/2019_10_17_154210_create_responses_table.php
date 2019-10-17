@@ -14,6 +14,7 @@ class CreateResponsesTable extends Migration
     public function up()
     {
         Schema::create('responses', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->integer('is_correct');
             $table->integer('score');

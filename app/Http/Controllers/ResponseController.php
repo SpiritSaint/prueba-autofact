@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Response\StoreRequest;
 use App\Response;
 use Illuminate\Http\Request;
 
@@ -14,16 +15,14 @@ class ResponseController extends Controller
             200
         );
     }
-    
-    public function store(Request $request)
+
+    public function store(StoreRequest $request)
     {
-        return response()->json(
-            Response::create($request->only([
-                'score',
-                'suggestions',
-                'is_correct'
-            ])),
-            201
-        );
+        Response::create($request->only([
+            'score',
+            'suggestions',
+            'is_correct'
+        ]));
+        return redirect()->route('home');
     }
 }
