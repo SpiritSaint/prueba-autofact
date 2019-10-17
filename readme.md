@@ -1,5 +1,6 @@
 # Requerimientos
 
+- Ubuntu 18.04
 - MySQL 5.7
 - PHP 7.3
 - Composer
