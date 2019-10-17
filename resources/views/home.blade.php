@@ -95,7 +95,6 @@
         var values = [1,2,3,4,5].map(function(score) {
             return (objects.filter((object) => object.score === score).length / objects.length) * 100;
         })
-            console.log(values);
         (function() {
             var data = {
                 labels: ['1', '2', '3', '4', '5'],
