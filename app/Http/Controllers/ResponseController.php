@@ -8,16 +8,9 @@ use Illuminate\Http\Request;
 
 class ResponseController extends Controller
 {
-    public function index()
-    {
-        return response()->json(
-            Response::all(),
-            200
-        );
-    }
-
     public function store(StoreRequest $request)
     {
+        logger()->info('Response created.');
         Response::create($request->only([
             'score',
             'suggestions',

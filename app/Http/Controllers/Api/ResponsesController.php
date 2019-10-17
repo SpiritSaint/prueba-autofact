@@ -16,6 +16,7 @@ class ResponsesController extends Controller
      */
     public function index()
     {
+        logger()->info('Responses fetched through api.');
         return response()->json(
             Response::all(),
             200
@@ -30,6 +31,7 @@ class ResponsesController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        logger()->info('Response created through api.');
         return response()->json(Response::create($request->only([
             'score',
             'suggestions',
@@ -45,6 +47,7 @@ class ResponsesController extends Controller
      */
     public function show(Response $response)
     {
+        logger()->info('Response fetched through api.');
         return response()->json($response, 200);
     }
 
@@ -57,6 +60,7 @@ class ResponsesController extends Controller
      */
     public function update(StoreRequest $request, Response $response)
     {
+        logger()->info('Response updated through api.');
         return response()->json($response->update($request->only([
             'score',
             'suggestions',
@@ -72,6 +76,7 @@ class ResponsesController extends Controller
      */
     public function destroy(Response $response)
     {
+        logger()->info('Responses deleted through api.');
         $response->delete();
         return response()->json([], 200);
     }
