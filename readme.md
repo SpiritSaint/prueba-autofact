@@ -78,7 +78,7 @@ La aplicación produce los siguientes logs:
 La aplicación cuenta con la siguiente API rest:
 
 |URL|Método|Descripción|
-|---|---|
+|---|---|---|
 |/api/response|GET|Obtiene todos las respuestas en sistema|
 |/api/response|POST|Inserta una respuesta en la base de datos, requiere los campos de score, suggestions y is_correct.|
 |/api/response/{id}|GET|Obtiene una respuesta en específico|
