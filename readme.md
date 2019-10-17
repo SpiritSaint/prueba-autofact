@@ -79,11 +79,11 @@ La aplicación cuenta con la siguiente API rest:
 
 |URL|Método|Descripción|
 |---|---|
-|/api/responses|GET|Obtiene todos las respuestas en sistema|
-|/api/responses|POST|Inserta una respuesta en la base de datos, requiere los campos de score, suggestions y is_correct.|
-|/api/responses/{id}|GET|Obtiene una respuesta en específico|
-|/api/responses/{id}|PUT|Actualiza una respuesta en la base de datos, requiere los campos de score, suggestions y is_correct.|
-|/api/responses/{id}|DELETE|Elimina una respuesta en la base de datos|
+|/api/response|GET|Obtiene todos las respuestas en sistema|
+|/api/response|POST|Inserta una respuesta en la base de datos, requiere los campos de score, suggestions y is_correct.|
+|/api/response/{id}|GET|Obtiene una respuesta en específico|
+|/api/response/{id}|PUT|Actualiza una respuesta en la base de datos, requiere los campos de score, suggestions y is_correct.|
+|/api/response/{id}|DELETE|Elimina una respuesta en la base de datos|
 
 ## Estructura de datos
 
