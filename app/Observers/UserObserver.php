@@ -14,7 +14,7 @@ class UserObserver
      */
     public function creating(User $user)
     {
-        if ($user->email === 'admin@dominio.cl') {
+        if (User::all()->count() === 0) {
             $user->is_admin = true;
         }
     }
