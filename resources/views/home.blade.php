@@ -16,7 +16,7 @@
 
                             <h1>Administrador</h1>
                             <div>
-                                <div class="ct-chart ct-perfect-fourth"></div>
+                                <chart :responses="{{\App\Response::all()}}"></chart>
                             </div>
                         @endif
 
@@ -31,6 +31,7 @@
                             </div>
                         @endif
 
+                        @if (\App\Repositories\MonthlyFormRepository::can())
                         <h1>Formulario</h1>
 
                         <form method="POST" action="{{ route('responses.store') }}">
@@ -74,55 +75,13 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
+                        @else
+                            @include('partials.last-submit', ['last' => \App\Repositories\MonthlyFormRepository::last()])
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('chart')
-    <style>
-        .ct-label {
-            color: #FFF !important;
-            fill: #FFF !important;
-            text-shadow: 0px 1px 0px rgba(0,0,0,1);
-        }
-    </style>
-
-    <script  type="text/javascript">
-        var objects = {!! \App\Response::all()->toJson() !!};
-        var values = [1,2,3,4,5].map(function(score) {
-            return (objects.filter((object) => object.score === score).length / objects.length) * 100;
-        })
-        (function() {
-            var data = {
-                labels: ['1', '2', '3', '4', '5'],
-                series: values
-            };
-            var options = {
-                labelInterpolationFnc: function(value) {
-                    return value
-                }
-            };
-            var responsiveOptions = [
-                ['screen and (min-width: 640px)', {
-                    chartPadding: 30,
-                    labelOffset: 100,
-                    labelDirection: 'explode',
-                    labelInterpolationFnc: function(value) {
-                        return value;
-                    }
-                }],
-                ['screen and (min-width: 1024px)', {
-                    labelOffset: 80,
-                    chartPadding: 20
-                }]
-            ];
-            setTimeout(function () {
-                new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
-            }, 1000)
-        })();
-    </script>
 @endsection
 
