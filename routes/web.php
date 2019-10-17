@@ -20,3 +20,5 @@ Auth::routes();
 Route::resource('/responses', 'ResponseController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/graph', 'HomeController@graph')->name('graph');
+Route::get('/all', 'HomeController@all')->name('all');

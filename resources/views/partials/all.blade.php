@@ -1,5 +1,3 @@
-<h1 class="mt-4">Todas las respuestas</h1>
-
 @foreach (\App\Response::all() as $response)
     <h2>Respuesta #{{ $response->id }}</h2>
     <table class="table">

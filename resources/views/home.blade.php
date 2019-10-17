@@ -6,34 +6,31 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <div class="tab-content" id="content">
-                            <div class="tab-pane fade show active" id="last" role="tabpanel" aria-labelledby="last-tab">
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul class="mb-0">
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-                                @if (\App\Repositories\MonthlyFormRepository::can())
-                                    @include('partials.form')
-                                @else
-                                    @include('partials.last-submit', ['last' => \App\Repositories\MonthlyFormRepository::last()])
-                                @endif
-                            </div>
-                            @if (auth()->user()->is_admin)
-                                @include('partials.graph')
-                                @include('partials.all')
+                        <nav class="nav nav-pills flex-column flex-sm-row mb-4">
+                            @if (\App\Repositories\MonthlyFormRepository::can())
+                                <a class="flex-sm-fill text-sm-center nav-link active" href="#">Formulario</a>
+                            @else
+                                <a class="flex-sm-fill text-sm-center nav-link active" href="#">Última respuesta</a>
                             @endif
-                        </div>
+                            @if (auth()->user()->is_admin)
+                                <a class="flex-sm-fill text-sm-center nav-link" href="/graph">Gráfico</a>
+                                <a class="flex-sm-fill text-sm-center nav-link" href="/all">Todas las respuestas</a>
+                            @endif
+                        </nav>
+                        @if (\App\Repositories\MonthlyFormRepository::can())
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @include('partials.form')
+                        @else
+                            @include('partials.last-submit', ['last' => \App\Repositories\MonthlyFormRepository::last()])
+                        @endif
                     </div>
                 </div>
             </div>
