@@ -41,3 +41,19 @@ Para iniciar un servidor de pruebas debes ejecutar el siguiente comando:
 ```
 php artisan serve
 ```
+
+# Registros / Logs
+
+La aplicación produce los siguientes logs:
+
+|Log|Descripción|
+|---|---|
+|User join home.|Cuando un usuario ingresa al formulario o a la última respuesta.
+|User join graph.|Cuando un usuario ingresa a ver el gráfico.|
+|User join all responses.|Cuando un usuario ingresa a ver todas las respuestas.|
+|Responses fetched through api.|Cuando la aplicación recuperó las respuestas desde la base de datos utilizando la API.|
+|Response fetched through api.|Cuando la aplicación recuperó una respuesta desde la base de datos utilizando la API.|
+|Response created through api.|Cuando la aplicación inserta una respuesta en la base de datos utilizando la API.|
+|Response updated through api.|Cuando la aplicación actualizó una respuesta en la base de datos utilizando la API.|
+|Responses deleted through api.|Cuando la aplicación eliminó una respuesta de la base de datos utilizando la API.|
+|
